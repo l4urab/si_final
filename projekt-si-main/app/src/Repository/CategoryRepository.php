@@ -66,6 +66,7 @@ class CategoryRepository extends ServiceEntityRepository
         return $queryBuilder ?? $this->createQueryBuilder('category');
     }
 
+
     /**
      * Save entity.
      *
@@ -74,6 +75,17 @@ class CategoryRepository extends ServiceEntityRepository
     public function save(Category $category): void
     {
         $this->_em->persist($category);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Category $category Category entity
+     */
+    public function delete(Category $category): void
+    {
+        $this->_em->remove($category);
         $this->_em->flush();
     }
 }

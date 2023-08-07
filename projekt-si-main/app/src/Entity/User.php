@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EventsRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EventsRepository::class)]
-class Events
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
