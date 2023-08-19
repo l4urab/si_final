@@ -11,17 +11,6 @@
             <dt>{{ 'label_title'|trans }}</dt>
             <dd>{{  category.title }}</dd>
             <dt>{{ 'label_elements'|trans }}</dt>
-            <dd>
-                {%  if category.elements is defined and category.elements|length %}
-                    {% for element in category.elements %}
-                        <p>
-                            {{ element.title }}
-                        </p>
-                    {% endfor %}
-                {% else %}
-                    &nbsp;&nbsp;
-                {% endif %}
-            </dd>
         </dl>
         <p>
             <a href="{{ url('category_index') }}" title="{{ 'action_back_to_list'|trans }}">

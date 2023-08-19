@@ -6,34 +6,27 @@
 namespace App\Service;
 
 use App\Repository\CategoryRepository;
+use App\Repository\TaskRepository; // Import the TaskRepository
 use App\Entity\Category;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\NonUniqueResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
-/**
- * Class CategoryService.
- */
 class CategoryService implements CategoryServiceInterface
 {
-    /**
-     * Task repository.
-     */
     private CategoryRepository $categoryRepository;
-
-    /**
-     * Paginator.
-     */
+    private TaskRepository $taskRepository; // Add the TaskRepository
     private PaginatorInterface $paginator;
 
-    /**
-     * Constructor.
-     *
-     * @param CategoryRepository     $categoryRepository Category repository
-     * @param PaginatorInterface $paginator      Paginator
-     */
-    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator)
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        TaskRepository     $taskRepository, // Inject TaskRepository
+        PaginatorInterface $paginator
+    )
     {
         $this->categoryRepository = $categoryRepository;
+        $this->taskRepository = $taskRepository; // Initialize taskRepository
         $this->paginator = $paginator;
     }
 
@@ -69,6 +62,17 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
+     * Delete entity.
+     *
+     * @param Category $category Category entity
+     */
+    public function delete(Category $category): void
+    {
+        $this->categoryRepository->delete($category);
+    }
+
+
+    /**
      * Can Category be deleted?
      *
      * @param Category $category Category entity
@@ -81,10 +85,8 @@ class CategoryService implements CategoryServiceInterface
             $result = $this->taskRepository->countByCategory($category);
 
             return !($result > 0);
-        } catch (NoResultException|NonUniqueResultException) {
+        } catch (NoResultException|NonUniqueResultException $e) {
             return false;
         }
     }
-
-
 }

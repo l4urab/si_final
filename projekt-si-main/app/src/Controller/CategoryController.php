@@ -6,11 +6,16 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\Type\CategoryType;
 use App\Service\CategoryServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+
+
 
 /**
  * Class CategoryController.
@@ -24,11 +29,22 @@ class CategoryController extends AbstractController
     private CategoryServiceInterface $categoryService;
 
     /**
-     * Constructor.
+     * Translator.
+     *
+     * @var TranslatorInterface
      */
-    public function __construct(CategoryServiceInterface $taskService)
+    private TranslatorInterface $translator;
+
+    /**
+     * Constructor.
+     *
+     * @param CategoryServiceInterface $categoryService Category service
+     * @param TranslatorInterface      $translator  Translator
+     */
+    public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
     {
-        $this->categoryService = $taskService;
+        $this->categoryService = $categoryService;
+        $this->translator = $translator;
     }
 
     /**
@@ -65,6 +81,7 @@ class CategoryController extends AbstractController
     {
         return $this->render('category/show.html.twig', ['category' => $category]);
     }
+
 
     /**
      * Create action.
@@ -127,20 +144,7 @@ class CategoryController extends AbstractController
             ]
         );
     }
-    /**
-     * Save entity.
-     *
-     * @param Category $category Category entity
-     */
-    public function save(Category $category): void
-    {
-        if (null == $category->getId()) {
-            $category->setCreatedAt(new \DateTimeImmutable());
-        }
-        $category->setUpdatedAt(new \DateTimeImmutable());
 
-        $this->categoryRepository->save($category);
-    }
 
     /**
      * Delete action.
