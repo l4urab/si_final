@@ -37,11 +37,11 @@ class ContactService implements ContactServiceInterface
     }
 
     /**
-     * Get paginated list of events.
+     * Get paginated list of contacts.
      *
      * @param int $page Page number
      *
-     * @return PaginationInterface<string, mixed> Paginated list of events
+     * @return PaginationInterface<string, mixed> Paginated list of contacts
      */
     public function getPaginatedList(int $page): PaginationInterface
     {

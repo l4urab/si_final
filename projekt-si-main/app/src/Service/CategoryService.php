@@ -6,7 +6,7 @@
 namespace App\Service;
 
 use App\Repository\CategoryRepository;
-use App\Repository\TaskRepository; // Import the TaskRepository
+use App\Repository\EventRepository;
 use App\Entity\Category;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\NonUniqueResultException;
@@ -15,20 +15,35 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class CategoryService implements CategoryServiceInterface
 {
+    /**
+     * Post repository.
+     */
+    public EventRepository $eventRepository;
+
+    /**
+     * Category repository.
+     */
     private CategoryRepository $categoryRepository;
-    private TaskRepository $taskRepository; // Add the TaskRepository
+
+    /**
+     * Paginator.
+     */
     private PaginatorInterface $paginator;
 
-    public function __construct(
-        CategoryRepository $categoryRepository,
-        TaskRepository     $taskRepository, // Inject TaskRepository
-        PaginatorInterface $paginator
-    )
+    /**
+     * Constructor.
+     *
+     * @param CategoryRepository $categoryRepository Category repository
+     * @param EventRepository     $eventRepository     Event repository
+     * @param PaginatorInterface $paginator          Paginator
+     */
+    public function __construct(CategoryRepository $categoryRepository, EventRepository $postRepository, PaginatorInterface $paginator)
     {
         $this->categoryRepository = $categoryRepository;
-        $this->taskRepository = $taskRepository; // Initialize taskRepository
+        $this->eventRepository = $postRepository;
         $this->paginator = $paginator;
     }
+
 
     /**
      * Get paginated list.
@@ -53,7 +68,7 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if ($category->getId() == null) {
+        if (null == $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());
@@ -82,10 +97,10 @@ class CategoryService implements CategoryServiceInterface
     public function canBeDeleted(Category $category): bool
     {
         try {
-            $result = $this->taskRepository->countByCategory($category);
+            $result = $this->eventRepository->countByCategory($category);
 
             return !($result > 0);
-        } catch (NoResultException|NonUniqueResultException $e) {
+        } catch (NoResultException|NonUniqueResultException) {
             return false;
         }
     }

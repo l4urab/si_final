@@ -38,12 +38,12 @@ class CategoryController extends AbstractController
     /**
      * Constructor.
      *
-     * @param CategoryServiceInterface $categoryService Category service
+     * @param CategoryServiceInterface $categoryService Event service
      * @param TranslatorInterface      $translator  Translator
      */
-    public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
+    public function __construct(CategoryServiceInterface $eventService, TranslatorInterface $translator)
     {
-        $this->categoryService = $categoryService;
+        $this->categoryService = $eventService;
         $this->translator = $translator;
     }
 
@@ -113,6 +113,15 @@ class CategoryController extends AbstractController
         );
     }
 
+    /**
+     * Edit action.
+     *
+     * @param Request  $request  HTTP request
+     * @param Category $category Category entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(
@@ -146,6 +155,7 @@ class CategoryController extends AbstractController
     }
 
 
+
     /**
      * Delete action.
      *
@@ -160,7 +170,7 @@ class CategoryController extends AbstractController
         if(!$this->categoryService->canBeDeleted($category)) {
             $this->addFlash(
                 'warning',
-                $this->translator->trans('message.category_contains_tasks')
+                $this->translator->trans('message.category_contains_events')
             );
 
             return $this->redirectToRoute('category_index');
