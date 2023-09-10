@@ -12,6 +12,12 @@
             {{ knp_pagination_render(pagination) }}
         </div>
 
+        <th>
+            <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'create an event'|trans }}
+            </a>
+        </th>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -34,8 +40,16 @@
                     <td>{{ event.category.title }}</td>
                     <td>{{ event.date|format_date('long') }}</td>
                     <td>
-                        <a href="{{ url('event_show', {id: event.id}) }}" title="{{ 'action.show'|trans }}">
+
+                        <a href="{{ url('event_show', {id: event.id}) }}" title="{{ 'event.show'|trans }}">
                             {{ 'action.show'|trans }}
+                        </a>
+                        <a href="{{ url('event_edit', {id: event.id}) }}" title="{{ 'event.edit'|trans }}">
+                            {{ 'edit'|trans }}
+                        </a>
+
+                        <a href="{{ url('event_delete', {id: event.id}) }}" title="{{ 'event.delete'|trans }}">
+                            {{ 'delete'|trans }}
                         </a>
                     </td>
                 </tr>

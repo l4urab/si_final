@@ -5,6 +5,8 @@
 
 namespace App\Service;
 
+use App\Entity\Category;
+use App\Entity\Contact;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -21,4 +23,17 @@ interface ContactServiceInterface
      */
     public function getPaginatedList(int $page): PaginationInterface;
 
+
+    /**
+     * Delete entity.
+     *
+     * @param Contact $contact Contact entity
+     */
+    public function delete(Contact $contact): void;
+
+    /**
+     * Save entity.
+     *
+     * @param Contact $contact Contact entity
+     */
 }

@@ -4,7 +4,8 @@
  */
 
 namespace App\Service;
-
+use App\Entity\Event;
+use App\Entity\Contact;
 use App\Repository\EventRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -74,5 +75,30 @@ class EventService implements EventServiceInterface
     public function getPastEvents(?int $limit = null): array
     {
         return $this->eventRepository->findPastEvents($limit);
+    }
+
+    /**
+     * Save entity.
+     *
+     * @param Event $event Event entity
+     */
+    public function save(Event $event): void
+    {
+        if (null == $event->getId()) {
+            $event->setCreatedAt(new \DateTimeImmutable());
+        }
+        $event->setUpdatedAt(new \DateTimeImmutable());
+
+        $this->eventRepository->save($event);
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Event $event Event entity
+     */
+    public function delete(Event $event): void
+    {
+        $this->eventRepository->delete($event);
     }
 }

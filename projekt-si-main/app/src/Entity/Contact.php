@@ -61,7 +61,7 @@ class Contact
      * @var string|null
      */
     #[ORM\Column(length: 191)]
-    private ?string $phone_number = null;
+    private ?string $phoneNumber = null;
 
 
 
@@ -171,25 +171,25 @@ class Contact
     }
 
     /**
-     * Setter for phone_number.
+     * Setter for phoneNumber.
      *
-     * @param string|null $phone_number phone_number
+     * @param string|null $phoneNumber phoneNumber
      * @return static
      */
-    public function setphone_number(?string $phone_number): static
+    public function setphoneNumber(?string $phoneNumber): static
     {
-        $this->phone_number = $phone_number;
+        $this->phoneNumber = $phoneNumber;
         return $this;
     }
 
     /**
-     * Getter for phone_number.
+     * Getter for phoneNumber.
      *
-     * @return string|null phone_number of the contact
+     * @return string|null phoneNumber of the contact
      */
-    public function getphone_number(): ?string
+    public function getphoneNumber(): ?string
     {
-        return $this->phone_number;
+        return $this->phoneNumber;
     }
 
 

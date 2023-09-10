@@ -5,6 +5,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Contact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -58,6 +59,17 @@ class ContactRepository extends ServiceEntityRepository
     }
 
     /**
+     * Save entity.
+     *
+     * @param Contact $contact Contact entity
+     */
+    public function save(Contact $contact): void
+    {
+        $this->_em->persist($contact);
+        $this->_em->flush();
+    }
+
+    /**
      * Query all records.
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder
@@ -67,5 +79,15 @@ class ContactRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->select('contact')
             ->orderBy('contact.updatedAt', 'DESC');
+    }
+    /**
+     * Delete entity.
+     *
+     * @param Contact $contact Contact entity
+     */
+    public function delete(Contact $contact): void
+    {
+        $this->_em->remove($contact);
+        $this->_em->flush();
     }
 }

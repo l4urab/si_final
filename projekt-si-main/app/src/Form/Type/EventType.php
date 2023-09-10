@@ -49,7 +49,7 @@ class EventType extends AbstractType
             [
                 'class' => Category::class,
                 'choice_label' => function ($category): string {
-                    return $category->getName();
+                    return $category->getTitle();
                 },
                 'label' => 'label_category',
                 'placeholder' => '---',

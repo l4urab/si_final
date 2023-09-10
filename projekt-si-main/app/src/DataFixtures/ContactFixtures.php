@@ -43,7 +43,7 @@ class ContactFixtures extends Fixture
         for ($i = 0; $i < 10; ++$i) {
             $contact = new Contact();
             $contact->setName($this->faker->sentence);
-            $contact->setphone_number($this->faker->sentence);
+            $contact->setphoneNumber($this->faker->sentence);
             $contact->setEmail($this->faker->sentence);
 
             $contact->setCreatedAt(

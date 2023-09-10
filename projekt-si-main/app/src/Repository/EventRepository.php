@@ -58,6 +58,17 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
+     * Save entity.
+     *
+     * @param Event $event Event entity
+     */
+    public function save(Event $event): void
+    {
+        $this->_em->persist($event);
+        $this->_em->flush();
+    }
+
+    /**
      * Query all records.
      *
      * @return \Doctrine\ORM\QueryBuilder Query builder
@@ -67,5 +78,15 @@ class EventRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->select('event')
             ->orderBy('event.updatedAt', 'DESC');
+    }
+    /**
+     * Delete entity.
+     *
+     * @param Event $event Event entity
+     */
+    public function delete(Event $event): void
+    {
+        $this->_em->remove($event);
+        $this->_em->flush();
     }
 }

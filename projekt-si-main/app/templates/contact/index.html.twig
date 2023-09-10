@@ -12,6 +12,11 @@
             {{ knp_pagination_render(pagination) }}
         </div>
 
+        <th><a href="{{ url('contact_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'create a contact'|trans }}
+            </a>
+        </th>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -20,7 +25,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'contact.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'contact.name') }}</th>
                 <th>{{ 'label.email'|trans }}</th>
-                <th>{{ 'label.phone_number'|trans }}</th>
+                <th>{{ 'label.phoneNumber'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -32,22 +37,16 @@
                     <td>{{ contact.updatedAt|format_date('long') }}</td>
                     <td>{{ contact.name }}</td>
                     <td>{{ contact.email }}</td>
-                    <td>{{ contact.phone_number }}</td>
-
+                    <td>{{ contact.phoneNumber }}</td>
                     <td>
+
                         <a href="{{ url('contact_show', {id: contact.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
-                    </td>
-                    <td>
-                        {#
-                        <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
-                            {{ 'action.show'|trans }}
-                        </a>
-                        <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.edit'|trans }}">
+                        <a href="{{ url('contact_edit', {id: contact.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'edit'|trans }}
                         </a>
-                        #}
+
                         <a href="{{ url('contact_delete', {id: contact.id}) }}" title="{{ 'action.delete'|trans }}">
                             {{ 'delete'|trans }}
                         </a>

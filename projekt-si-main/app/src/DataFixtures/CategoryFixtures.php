@@ -37,7 +37,6 @@ class CategoryFixtures extends AbstractBaseFixtures
                 )
             );
 
-            $category->setSlug($this->faker->unique()->word);
 
 
             return $category;

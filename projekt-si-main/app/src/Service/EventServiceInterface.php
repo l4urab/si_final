@@ -4,7 +4,7 @@
  */
 
 namespace App\Service;
-
+use App\Entity\Event;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -38,4 +38,19 @@ interface EventServiceInterface
      * @return array Array of past events
      */
     public function getPastEvents(?int $limit = null): array;
+
+    /**
+     * Save entity.
+     *
+     * @param Event $event Event entity
+     */
+
+    /**
+     * Delete entity.
+     *
+     * @param Event $event Event entity
+     */
+    public function delete(Event $event): void;
+
+
 }
