@@ -62,4 +62,47 @@ class ContactController extends AbstractController
     {
         return $this->render('contact/show.html.twig', ['contact' => $contact]);
     }
+
+    /**
+     * Delete action.
+     *
+     * @param Request $request HTTP request
+     * @param Contact $contact Contact entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/delete', name: 'contact_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    public function delete(Request $request, Contact $contact): Response
+    {
+
+        $form = $this->createForm(
+            FormType::class,
+            $contact,
+            [
+                'method' => 'DELETE',
+                'action' => $this->generateUrl('contact_delete', ['id' => $contact->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->contactService->delete($contact);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.deleted_successfully')
+            );
+
+            return $this->redirectToRoute('contact_index');
+        }
+
+        return $this->render(
+            'contact/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'contact' => $contact,
+            ]
+        );
+    }
+
 }

@@ -11,6 +11,11 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+        <th><a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'create a category'|trans }}
+            </a>
+        </th>
+
 
         <table class="table table-striped">
             <thead>
