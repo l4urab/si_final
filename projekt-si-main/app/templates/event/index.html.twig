@@ -16,6 +16,9 @@
             <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
                 {{ 'create an event'|trans }}
             </a>
+            <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'create an event'|trans }}
+            </a>
         </th>
 
         <table class="table table-striped">
@@ -51,6 +54,11 @@
                         <a href="{{ url('event_delete', {id: event.id}) }}" title="{{ 'event.delete'|trans }}">
                             {{ 'delete'|trans }}
                         </a>
+
+                        <a href="{{ url('event_index', {'filters.category_id' : event.category.id}) }}" title="{{ event.category.title }}">
+                            {{ event.category.title }}
+                        </a>
+
                     </td>
                 </tr>
             {% endfor %}

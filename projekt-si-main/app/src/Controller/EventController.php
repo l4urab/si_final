@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-
+use App\Entity\User;
 use App\Entity\Event;
 use App\Form\Type\EventType;
 use App\Service\EventServiceInterface;
@@ -54,11 +54,33 @@ class EventController extends AbstractController
     #[Route(name: 'event_index', methods: 'GET')]
     public function index(Request $request): Response
     {
+        $filters = $this->getFilters($request);
+        /** @var User $user */
+        $user = $this->getUser();
         $pagination = $this->eventService->getPaginatedList(
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
+            $user,
+            $filters
         );
 
         return $this->render('event/index.html.twig', ['pagination' => $pagination]);
+    }
+
+    /**
+     * Get filters from request.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array<string, int> Array of filters
+     *
+     * @psalm-return array{category_id: int}
+     */
+    private function getFilters(Request $request): array
+    {
+        $filters = [];
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
+
+        return $filters;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use App\Entity\User;
 
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
@@ -75,21 +76,10 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
-    /**
-     * Tags.
-     *
-     * @var array
-     *
-     * @ORM\ManyToMany(
-     *     targetEntity="App\Entity\Tag",
-     *     inversedBy="tasks",
-     *     fetch="EXTRA_LAZY",
-     * )
-     * @ORM\JoinTable(name="tasks_tags")
-     *
-     * @Assert\Type(type="Doctrine\Common\Collections\Collection")
-     */
-    private array $tags;
+
+
+    #[ORM\ManyToOne]
+    private ?User $author = null;
 
 
     /**
@@ -211,6 +201,18 @@ class Event
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }

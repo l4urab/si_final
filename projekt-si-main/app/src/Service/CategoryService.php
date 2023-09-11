@@ -4,10 +4,10 @@
  */
 
 namespace App\Service;
-
 use App\Repository\CategoryRepository;
 use App\Repository\EventRepository;
 use App\Entity\Category;
+use DateTimeImmutable;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\NonUniqueResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -34,7 +34,6 @@ class CategoryService implements CategoryServiceInterface
      * Constructor.
      *
      * @param CategoryRepository $categoryRepository Category repository
-     * @param EventRepository     $eventRepository     Event repository
      * @param PaginatorInterface $paginator          Paginator
      */
     public function __construct(CategoryRepository $categoryRepository, EventRepository $postRepository, PaginatorInterface $paginator)
@@ -69,9 +68,9 @@ class CategoryService implements CategoryServiceInterface
     public function save(Category $category): void
     {
         if (null == $category->getId()) {
-            $category->setCreatedAt(new \DateTimeImmutable());
+            $category->setCreatedAt(new DateTimeImmutable());
         }
-        $category->setUpdatedAt(new \DateTimeImmutable());
+        $category->setUpdatedAt(new DateTimeImmutable());
 
         $this->categoryRepository->save($category);
     }
@@ -103,5 +102,19 @@ class CategoryService implements CategoryServiceInterface
         } catch (NoResultException|NonUniqueResultException) {
             return false;
         }
+    }
+
+    /**
+     * Find by id.
+     *
+     * @param int $id Category id
+     *
+     * @return Category|null Category entity
+     *
+     * @throws NonUniqueResultException
+     */
+    public function findOneById(int $id): ?Category
+    {
+        return $this->categoryRepository->findOneById($id);
     }
 }

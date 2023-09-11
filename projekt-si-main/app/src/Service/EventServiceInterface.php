@@ -4,6 +4,7 @@
  */
 
 namespace App\Service;
+use App\Entity\User;
 use App\Entity\Event;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
@@ -19,7 +20,7 @@ interface EventServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list of events
      */
-    public function getPaginatedList(int $page): PaginationInterface;
+    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface;
 
     /**
      * Get upcoming events.
@@ -30,14 +31,6 @@ interface EventServiceInterface
      */
     public function getUpcomingEvents(?int $limit = null): array;
 
-    /**
-     * Get past events.
-     *
-     * @param int|null $limit Maximum number of past events to retrieve
-     *
-     * @return array Array of past events
-     */
-    public function getPastEvents(?int $limit = null): array;
 
     /**
      * Save entity.

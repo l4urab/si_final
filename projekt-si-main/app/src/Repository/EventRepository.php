@@ -4,11 +4,14 @@
  */
 
 namespace App\Repository;
+use App\Entity\User;
 
+use App\Entity\Category;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class EventRepository.
@@ -57,6 +60,8 @@ class EventRepository extends ServiceEntityRepository
         return $queryBuilder ?? $this->createQueryBuilder('event');
     }
 
+
+
     /**
      * Save entity.
      *
@@ -69,15 +74,41 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
+     * Query events by author.
+     *
+     * @param UserInterface         $user    User entity
+     * @param array<string, object> $filters Filters
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryByAuthor(UserInterface $user, array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll($filters);
+
+        $queryBuilder->andWhere('event.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
+    /**
      * Query all records.
      *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
+     * @param array<string, object> $filters Filters
+     *
+     * @return QueryBuilder Query builder
      */
-    public function queryAll(): QueryBuilder
+    public function queryAll(array $filters): QueryBuilder
     {
-        return $this->getOrCreateQueryBuilder()
-            ->select('event')
+        $queryBuilder = $this->getOrCreateQueryBuilder()
+            ->select(
+                'partial event.{id, createdAt, updatedAt, name}',
+                'partial category.{id, title}'
+            )
+            ->join('event.category', 'category')
             ->orderBy('event.updatedAt', 'DESC');
+
+        return $this->applyFiltersToList($queryBuilder, $filters);
     }
     /**
      * Delete entity.
@@ -89,4 +120,30 @@ class EventRepository extends ServiceEntityRepository
         $this->_em->remove($event);
         $this->_em->flush();
     }
+
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+        return $queryBuilder;
+    }
+
+    /**
+     * Find one by Id.
+     *
+     * @param int $id Id
+     *
+     * @return array<string, mixed>|null Result
+     */
+    public function findOneById(int $id): ?array
+    {
+        return count($this->data) && isset($this->data[$id])
+            ? $this->data[$id]
+            : null;
+    }
+
+
+
 }
