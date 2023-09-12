@@ -38,7 +38,6 @@ class CategoryController extends AbstractController
     /**
      * Constructor.
      *
-     * @param CategoryServiceInterface $categoryService Event service
      * @param TranslatorInterface      $translator  Translator
      */
     public function __construct(CategoryServiceInterface $eventService, TranslatorInterface $translator)

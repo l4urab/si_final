@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Form\Type\EventType;
 use App\Repository\EventRepository;
 use App\Service\EventServiceInterface;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -226,14 +227,15 @@ class EventController extends AbstractController
     public function displayTodaysEvents(EventRepository $eventRepository): Response
     {
         // Get today's date
-        $today = new \DateTime('today');
+        $today = new DateTime('today');
 
-        // Query the database for events happening today
         $events = $eventRepository->findEventsWithinDateRange($today, $today);
 
         return $this->render('event/todays_events.html.twig', [
             'events' => $events,
         ]);
     }
+
+
 
 }

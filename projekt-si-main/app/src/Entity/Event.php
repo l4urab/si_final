@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-use App\Entity\User;
 
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
@@ -9,8 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * Class Event.

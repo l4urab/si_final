@@ -7,8 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -77,21 +76,7 @@ class Contact
 
 
 
-    /**
-     * Tags.
-     *
-     * @var array
-     *
-     * @ORM\ManyToMany(
-     *     targetEntity="App\Entity\Tag",
-     *     inversedBy="tasks",
-     *     fetch="EXTRA_LAZY",
-     * )
-     * @ORM\JoinTable(name="tasks_tags")
-     *
-     * @Assert\Type(type="Doctrine\Common\Collections\Collection")
-     */
-    private array $tags;
+
 
 
     /**
@@ -176,7 +161,7 @@ class Contact
      * @param string|null $phoneNumber phoneNumber
      * @return static
      */
-    public function setphoneNumber(?string $phoneNumber): static
+    public function setPhoneNumber(?string $phoneNumber): static
     {
         $this->phoneNumber = $phoneNumber;
         return $this;
@@ -187,7 +172,7 @@ class Contact
      *
      * @return string|null phoneNumber of the contact
      */
-    public function getphoneNumber(): ?string
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
