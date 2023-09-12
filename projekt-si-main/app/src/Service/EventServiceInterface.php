@@ -22,14 +22,7 @@ interface EventServiceInterface
      */
     public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface;
 
-    /**
-     * Get upcoming events.
-     *
-     * @param int|null $limit Maximum number of upcoming events to retrieve
-     *
-     * @return array Array of upcoming events
-     */
-    public function getUpcomingEvents(?int $limit = null): array;
+
 
 
     /**

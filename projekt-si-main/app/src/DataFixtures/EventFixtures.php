@@ -52,6 +52,9 @@ class EventFixtures extends AbstractBaseFixtures implements DependentFixtureInte
             $category = $this->getRandomReference('categories');
             $event->setCategory($category);
 
+
+
+
             return $event;
         });
 

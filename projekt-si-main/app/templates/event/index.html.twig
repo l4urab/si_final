@@ -16,9 +16,10 @@
             <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
                 {{ 'create an event'|trans }}
             </a>
-            <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
-                {{ 'create an event'|trans }}
+            <a href="{{ url('todays_events') }}" title="{{ 'todays_events'|trans }}">
+                {{ 'title.todays_events'|trans }}
             </a>
+
         </th>
 
         <table class="table table-striped">
@@ -29,7 +30,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'event.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'event.name') }}</th>
                 <th>{{ 'label.category'|trans }}</th>
-                <th>{{ 'label.date'|trans }}</th>
+                <th>{{ 'label.date' |trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>

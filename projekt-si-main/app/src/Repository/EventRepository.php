@@ -144,6 +144,24 @@ class EventRepository extends ServiceEntityRepository
             : null;
     }
 
-
+    /**
+     * Find events within a specified date range.
+     *
+     * @param \DateTimeInterface $startDate Start date (inclusive)
+     * @param \DateTimeInterface $endDate   End date (inclusive)
+     *
+     * @return Event[] Returns an array of Event objects
+     */
+    public function findEventsWithinDateRange(\DateTimeInterface $startDate, \DateTimeInterface $endDate)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.date >= :startDate')
+            ->andWhere('e.date <= :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->orderBy('e.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
 }

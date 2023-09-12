@@ -2,3 +2,6 @@ index:
     path: /
     controller: App\Controller\EventController::index
 
+app_todays_events:
+    path: /todays-events
+    controller: App\Controller\YourController::displayTodaysEvents

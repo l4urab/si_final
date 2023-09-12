@@ -72,17 +72,9 @@ class EventService implements EventServiceInterface
         );
     }
 
-    /**
-     * Get upcoming events.
-     *
-     * @param int|null $limit Maximum number of upcoming events to retrieve
-     *
-     * @return array Array of upcoming events
-     */
-    public function getUpcomingEvents(?int $limit = null): array
-    {
-        return $this->eventRepository->findUpcomingEvents($limit);
-    }
+
+
+
 
 
     /**
@@ -129,4 +121,6 @@ class EventService implements EventServiceInterface
         }
         return $resultFilters;
     }
+
+
 }

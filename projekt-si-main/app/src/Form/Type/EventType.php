@@ -61,7 +61,7 @@ class EventType extends AbstractType
             'date',
             DateType::class,
             [
-                'label' => 'label.endDate',
+                'label' => 'label.date',
                 'required' => true,
             ]
         );

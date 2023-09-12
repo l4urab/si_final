@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Event;
 use App\Form\Type\EventType;
+use App\Repository\EventRepository;
 use App\Service\EventServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -212,4 +213,27 @@ class EventController extends AbstractController
             ]
         );
     }
+
+    /*
+    * Display events happening today.
+    *
+    * @param EventRepository $eventRepository Event repository
+    *
+    *
+    * @return Response HTTP response
+    */
+    #[Route('/todays_events', name: 'todays_events', methods: 'GET')]
+    public function displayTodaysEvents(EventRepository $eventRepository): Response
+    {
+        // Get today's date
+        $today = new \DateTime('today');
+
+        // Query the database for events happening today
+        $events = $eventRepository->findEventsWithinDateRange($today, $today);
+
+        return $this->render('event/todays_events.html.twig', [
+            'events' => $events,
+        ]);
+    }
+
 }

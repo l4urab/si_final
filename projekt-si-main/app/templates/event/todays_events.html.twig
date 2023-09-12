@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Today's Events
+{% endblock %}
+
+{% block body %}
+    <h1>Today's Events</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <!-- Add other columns as needed -->
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td>{{ event.date|date('Y-m-d H:i:s') }}</td>
+                <!-- Add other columns as needed -->
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
