@@ -5,11 +5,9 @@
 
 namespace App\Service;
 
-use App\Entity\Category;
 use App\Repository\ContactRepository;
 use App\Entity\Contact;
-use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\NonUniqueResultException;
+use DateTimeImmutable;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -74,9 +72,9 @@ class ContactService implements ContactServiceInterface
     public function save(Contact $contact): void
     {
         if (null == $contact->getId()) {
-            $contact->setCreatedAt(new \DateTimeImmutable());
+            $contact->setCreatedAt(new DateTimeImmutable());
         }
-        $contact->setUpdatedAt(new \DateTimeImmutable());
+        $contact->setUpdatedAt(new DateTimeImmutable());
 
         $this->contactRepository->save($contact);
     }

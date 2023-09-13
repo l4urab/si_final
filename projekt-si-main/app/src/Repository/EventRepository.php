@@ -4,10 +4,10 @@
  */
 
 namespace App\Repository;
-use App\Entity\User;
 
 use App\Entity\Category;
 use App\Entity\Event;
+use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -147,12 +147,12 @@ class EventRepository extends ServiceEntityRepository
     /**
      * Find events within a specified date range.
      *
-     * @param \DateTimeInterface $startDate Start date (inclusive)
-     * @param \DateTimeInterface $endDate   End date (inclusive)
+     * @param DateTimeInterface $startDate Start date (inclusive)
+     * @param DateTimeInterface $endDate   End date (inclusive)
      *
      * @return Event[] Returns an array of Event objects
      */
-    public function findEventsWithinDateRange(\DateTimeInterface $startDate, \DateTimeInterface $endDate)
+    public function findEventsWithinDateRange(DateTimeInterface $startDate, DateTimeInterface $endDate): array
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.date >= :startDate')

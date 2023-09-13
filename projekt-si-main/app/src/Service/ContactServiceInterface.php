@@ -5,7 +5,6 @@
 
 namespace App\Service;
 
-use App\Entity\Category;
 use App\Entity\Contact;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
