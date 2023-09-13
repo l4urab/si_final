@@ -27,20 +27,20 @@
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div>{{ app.user.email }}</div>
         <div>
-            <a href="{{ url('app_logout') }}"  class="{{ 'btn btn-light' }}">{{ 'logout'|trans }}</a>
+            <a href="{{ url('app_logout') }}"  class="{{ 'btn btn-light' }}">{{ 'action.logout'|trans }}</a>
         </div>
         <div>
-            <a href="{{ url('event_index') }}" title="{{ 'events'|trans }}" class="{{ 'btn btn-light' }}">
-                {{ 'events'|trans }}</a>
+            <a href="{{ url('event_index') }}" title="{{ 'see_events'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'see_events'|trans }}</a>
         </div>
         <div>
-            <a href="{{ url('contact_index') }}" title="{{ 'contacts'|trans }}" class="{{ 'btn btn-light' }}">
-                {{ 'contacts'|trans }}</a>
+            <a href="{{ url('contact_index') }}" title="{{ 'see_contacts'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'see_contacts'|trans }}</a>
 
         </div>
         <div>
-            <a href="{{ url('category_index') }}" title="{{ 'categories'|trans }}" class="{{ 'btn btn-light' }}">
-                {{ 'categories'|trans }}</a>
+            <a href="{{ url('category_index') }}" title="{{ 'see_categories'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'see_categories'|trans }}</a>
 
         </div>
     {% else %}

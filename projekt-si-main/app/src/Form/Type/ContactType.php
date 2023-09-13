@@ -31,7 +31,7 @@ class ContactType extends AbstractType
             'name',
             TextType::class,
             [
-                'label' => 'label.title',
+                'label' => 'label.name',
                 'required' => true,
                 'attr' => ['max_length' => 64],
             ]);
@@ -40,7 +40,7 @@ class ContactType extends AbstractType
             'email',
             TextType::class,
             [
-                'label' => 'label.title',
+                'label' => 'label.email',
                 'required' => true,
                 'attr' => ['max_length' => 191],
             ]);
@@ -49,7 +49,7 @@ class ContactType extends AbstractType
             'phoneNumber',
             TextType::class,
             [
-                'label' => 'label.title',
+                'label' => 'label.phone_number',
                 'required' => true,
                 'attr' => ['max_length' => 20],
             ]);

@@ -10,17 +10,13 @@
         <source>label.id</source>
         <target>Id</target>
       </trans-unit>
-      <trans-unit id="label.title">
-        <source>label.title</source>
-        <target>Tytuł</target>
+      <trans-unit id="label.name">
+        <source>label.name</source>
+        <target>imię</target>
       </trans-unit>
       <trans-unit id="label.content">
         <source>label.content</source>
         <target>Zawartość</target>
-      </trans-unit>
-      <trans-unit id="label.tags">
-        <source>label.tags</source>
-        <target>Tagi</target>
       </trans-unit>
       <trans-unit id="label.view">
         <source>label.view</source>
@@ -38,18 +34,120 @@
         <source>message.record_not_found</source>
         <target>Nie odnaleziono rekordu.</target>
       </trans-unit>
-      <trans-unit id="title.record_list">
-        <source>title.record_list</source>
-        <target>Lista Rekordów</target>
+      <trans-unit id="title.category_list">
+        <source>Kategorie</source>
+        <target>Kategorie</target>
       </trans-unit>
       <trans-unit id="title.record_view">
         <source>title.record_view</source>
         <target>Widok rekordu #%id%</target>
       </trans-unit>
-      <trans-unit id="title.task_details">
-        <source>title.task_details</source>
-        <target>Task details #%id%</target>
+
+      <trans-unit id="action.logout">
+              <source>action.logout</source>
+              <target>wyloguj</target>
       </trans-unit>
+      <trans-unit id="see_events">
+                    <source>see_events</source>
+                    <target>zobacz wydarzenia</target>
+      </trans-unit>
+      <trans-unit id="see_contacts">
+          <source>see_contacts</source>
+          <target>zobacz kontakty</target>
+      </trans-unit>
+      <trans-unit id="see_categories">
+                    <source>see_categories</source>
+                    <target>zobacz kategorie</target>
+      </trans-unit>
+      <trans-unit id="action.create">
+                    <source>action.create</source>
+                    <target>dodaj</target>
+      </trans-unit>
+      <trans-unit id="action.edit">
+                          <source>action.edit</source>
+                          <target>edytuj</target>
+      </trans-unit>
+      <trans-unit id="action.delete">
+                    <source>action.delete</source>
+                    <target>usuń</target>
+      </trans-unit>
+        <trans-unit id="title.event_list">
+                      <source>title.event_list</source>
+                      <target>wydarzenia</target>
+        </trans-unit>
+        <trans-unit id="todays_events">
+                      <source>todays_events</source>
+                      <target>dzisiejsze wydarzenia</target>
+        </trans-unit>
+        <trans-unit id="label.category">
+                      <source>label.category</source>
+                      <target>kategoria</target>
+        </trans-unit>
+        <trans-unit id="label.date">
+                      <source>label.date</source>
+                      <target>data</target>
+        </trans-unit>
+        <trans-unit id="action.show">
+                      <source>action.show</source>
+                      <target>szczegóły</target>
+        </trans-unit>
+        <trans-unit id="action.save">
+                      <source>action.save</source>
+                      <target>zapisz</target>
+        </trans-unit>
+        <trans-unit id="title.create">
+                      <source>title.create</source>
+                      <target>dodaj</target>
+        </trans-unit>
+        <trans-unit id="title.details">
+                      <source>title.details</source>
+                      <target>szczegóły</target>
+        </trans-unit>
+        <trans-unit id="title.edit">
+                      <source>title.edit</source>
+                      <target>edytycja</target>
+        </trans-unit>
+        <trans-unit id="year">
+            <source>Year</source>
+            <target>rok</target>
+        </trans-unit>
+        <trans-unit id="month">
+            <source>Month</source>
+            <target>miesiąć</target>
+        </trans-unit>
+        <trans-unit id="day">
+            <source>Day</source>
+            <target>dzień</target>
+        </trans-unit>
+        <trans-unit id="---">
+            <source>---</source>
+            <target>---</target>
+        </trans-unit>
+      <trans-unit id="title.delete">
+                    <source>title.delete</source>
+                    <target>usuwanie</target>
+      </trans-unit>
+      <trans-unit id="login">
+              <source>login</source>
+              <target>logowanie</target>
+      </trans-unit>
+    <trans-unit id="label.email">
+            <source>label.email</source>
+            <target>email</target>
+    </trans-unit>
+    <trans-unit id="label.title">
+            <source>label.title</source>
+            <target>nazwa</target>
+    </trans-unit>
+          <trans-unit id="label.phone_number">
+                  <source>label.phone_number</source>
+                  <target>numer telefonu</target>
+          </trans-unit>
+              </trans-unit>
+    <trans-unit id="title.contact_list">
+            <source>title.contact_list</source>
+            <target>kontakty</target>
+    </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.contact_details'|trans({'%id%': contact.id|default('')}) }}
+    {{ 'title.details'|trans({'%id%': contact.id|default('')}) }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.event_details'|trans({'%id%': contact.id|default('')}) }}</h1>
+    <h1>{{ 'title.details'|trans({'%id%': contact.id|default('')}) }}</h1>
     {% if contact is defined and contact|length %}
         <dl class="dl-horizontal">
             <dt>{{ 'label.id'|trans }}</dt>
@@ -16,11 +16,10 @@
             <dd>{{ contact.updatedAt|format_date('long') }}</dd>
             <dt>{{ 'label.name'|trans }}</dt>
             <dd>{{ contact.name }}</dd>
-            <dt>{{ 'label.name'|trans }}</dt>
-            <dd>{{ contact.name }}</dd>
-            <dt>{{ 'label.name'|trans }}</dt>
-            <dd>{{ contact.name }}</dd>
-
+            <dt>{{ 'label.phone_number'|trans }}</dt>
+            <dd>{{ contact.phoneNumber }}</dd>
+            <dt>{{ 'label.email'|trans }}</dt>
+            <dd>{{ contact.email }}</dd>
         </dl>
         <p>
             <a href="{{ url('contact_index') }}" title="{{ 'action.back_to_list'|trans }}">

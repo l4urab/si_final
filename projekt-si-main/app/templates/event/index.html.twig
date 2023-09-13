@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'Events'|trans }}
+    {{ 'title.event_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'Events'|trans }}</h1>
+    <h1>{{ 'title.event_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -14,10 +14,10 @@
 
         <th>
                 <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
-                {{ 'create an event'|trans }}
+                {{ 'action.create'|trans }}
             </a>
             <a href="{{ url('todays_events') }}" title="{{ 'todays_events'|trans }}" class="{{ 'btn btn-light' }}">
-                {{ 'todays events'|trans }}
+                {{ 'todays_events'|trans }}
             </a>
 
         </th>
@@ -28,9 +28,9 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'event.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'event.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'event.updatedAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'event.name') }}</th>
-                <th>{{ knp_pagination_sortable(pagination,'label.category'|trans, 'event.category' )}}</th>
-                <th>{{ knp_pagination_sortable(pagination,'label.date' |trans, 'event.date')}}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'label.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,'label.category'|trans, 'label.category' )}}</th>
+                <th>{{ knp_pagination_sortable(pagination,'label.date' |trans, 'label.date')}}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -49,15 +49,15 @@
                     <td>{{ event.date|format_date('long') }}</td>
                     <td>
 
-                        <a href="{{ url('event_show', {id: event.id}) }}" title="{{ 'event.show'|trans }}" class="{{ 'btn btn-light' }}">
+                        <a href="{{ url('event_show', {id: event.id}) }}" title="{{ 'action.show'|trans }}" class="{{ 'btn btn-light' }}">
                             {{ 'action.show'|trans }}
                         </a>
-                        <a href="{{ url('event_edit', {id: event.id}) }}" title="{{ 'event.edit'|trans }}" class="{{ 'btn btn-light' }}">
-                            {{ 'edit'|trans }}
+                        <a href="{{ url('event_edit', {id: event.id}) }}" title="{{ 'action.edit'|trans }}" class="{{ 'btn btn-light' }}">
+                            {{ 'action.edit'|trans }}
                         </a>
 
-                        <a href="{{ url('event_delete', {id: event.id}) }}" title="{{ 'event.delete'|trans }}" class="{{ 'btn btn-light' }}">
-                            {{ 'delete'|trans }}
+                        <a href="{{ url('event_delete', {id: event.id}) }}" title="{{ 'action.delete'|trans }}" class="{{ 'btn btn-light' }}">
+                            {{ 'action.delete'|trans }}
                         </a>
 
                     </td>

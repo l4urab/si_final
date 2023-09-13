@@ -51,7 +51,7 @@ class EventType extends AbstractType
                 'choice_label' => function ($category): string {
                     return $category->getTitle();
                 },
-                'label' => 'label_category',
+                'label' => 'label.category',
                 'placeholder' => '---',
                 'required' => true,
             ]
@@ -65,9 +65,6 @@ class EventType extends AbstractType
                 'required' => true,
             ]
         );
-
-
-
     }
 
     /**
