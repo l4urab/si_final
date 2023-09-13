@@ -1,60 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Today's Events
+    {{ 'title.event_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>Today's Events</h1>
+    <h1>{{ 'title.event_list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>created at</th>
-            <th>updated at</th>
-            <th>name</th>
-            <th>category</th>
-            <th>date</th>
-            <th>action</th>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
 
-        </tr>
-        </thead>
-        <tbody>
-        {% for event in events %}
+        <th>
+            <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'action.create'|trans }}
+            </a>
+            <a href="{{ url('todays_events') }}" title="{{ 'todays_events'|trans }}" class="{{ 'btn btn-light' }}">
+                {{ 'todays_events'|trans }}
+            </a>
+
+        </th>
+
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ event.id }}</td>
-                <td>{{ event.createdAt|format_date('long') }}</td>
-                <td>{{ event.updatedAt|format_date('long') }}</td>
-                <td>{{ event.name }}</td>
-                <td>
-                    <a href="{{ url('event_index', {'filters.category_id' : event.category.id}) }}" title="{{ event.category.title }}">
-                        {{ event.category.title }}
-                    </a>
-                </td>
-                <td>{{ event.date|format_date('long') }}</td>
-                <td>
-
-                    <a href="{{ url('event_show', {id: event.id}) }}" title="{{ 'event.show'|trans }}">
-                        {{ 'action.show'|trans }}
-                    </a>
-                    <a href="{{ url('event_edit', {id: event.id}) }}" title="{{ 'event.edit'|trans }}">
-                        {{ 'edit'|trans }}
-                    </a>
-
-                    <a href="{{ url('event_delete', {id: event.id}) }}" title="{{ 'event.delete'|trans }}">
-                        {{ 'delete'|trans }}
-                    </a>
-
-                </td>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'event.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'event.createdAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'event.updatedAt') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'label.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,'label.category'|trans, 'label.category' )}}</th>
+                <th>{{ knp_pagination_sortable(pagination,'label.date' |trans, 'label.date')}}</th>
+                <th>{{ 'label.actions'|trans }}</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <p>
-        <a href="{{ url('event_index') }}" title="{{ 'action.back_to_list'|trans }}" class="{{ 'btn btn-light' }}">
-            {{ 'action.back_to_list'|trans }}
-        </a>
-    </p>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.createdAt|format_date('long') }}</td>
+                    <td>{{ event.updatedAt|format_date('long') }}</td>
+                    <td>{{ event.name }}</td>
+                    <td>
+                        <a href="{{ url('event_index', {'filters.category_id' : event.category.id}) }}" title="{{ event.category.title }}">
+                            {{ event.category.title }}
+                        </a>
+                    </td>
+                    <td>{{ event.date|format_date('long') }}</td>
+                    <td>
 
+                        <a href="{{ url('event_show', {id: event.id}) }}" title="{{ 'action.show'|trans }}" class="{{ 'btn btn-light' }}">
+                            {{ 'action.show'|trans }}
+                        </a>
+                        <a href="{{ url('event_edit', {id: event.id}) }}" title="{{ 'action.edit'|trans }}" class="{{ 'btn btn-light' }}">
+                            {{ 'action.edit'|trans }}
+                        </a>
+
+                        <a href="{{ url('event_delete', {id: event.id}) }}" title="{{ 'action.delete'|trans }}" class="{{ 'btn btn-light' }}">
+                            {{ 'action.delete'|trans }}
+                        </a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {{ 'message.empty_list'|trans }}
+        </p>
+    {% endif %}
 {% endblock %}

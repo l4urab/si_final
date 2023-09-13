@@ -65,6 +65,7 @@ class EventType extends AbstractType
                 'required' => true,
             ]
         );
+
     }
 
     /**
