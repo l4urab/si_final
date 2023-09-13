@@ -1,23 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.event_list'|trans }}
+    {{ 'title.todays_event_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.event_list'|trans }}</h1>
-    {% if pagination is defined and pagination.items|length %}
+    <h1>{{ 'title.todays_event_list'|trans }}</h1>
+
 
         <div class="navigation text-center">
-            {{ knp_pagination_render(pagination) }}
         </div>
 
         <th>
             <a href="{{ url('event_create') }}" title="{{ 'action.create'|trans }}" class="{{ 'btn btn-light' }}">
                 {{ 'action.create'|trans }}
-            </a>
-            <a href="{{ url('todays_events') }}" title="{{ 'todays_events'|trans }}" class="{{ 'btn btn-light' }}">
-                {{ 'todays_events'|trans }}
             </a>
 
         </th>
@@ -25,12 +21,12 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'event.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'event.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'event.updatedAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.name'|trans, 'label.name') }}</th>
-                <th>{{ knp_pagination_sortable(pagination,'label.category'|trans, 'label.category' )}}</th>
-                <th>{{ knp_pagination_sortable(pagination,'label.date' |trans, 'label.date')}}</th>
+                <th>{{ 'label.id'|trans }}</th>
+                <th>{{ 'label.created_at'|trans }}</th>
+                <th>{{ 'label.updated_at'|trans }}</th>
+                <th>{{ 'label.name'|trans }}</th>
+                <th>{{ 'label.category'|trans }}</th>
+                <th>{{ 'label.date'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -66,13 +62,4 @@
             </tbody>
         </table>
 
-        <div class="navigation text-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
-
-    {% else %}
-        <p>
-            {{ 'message.empty_list'|trans }}
-        </p>
-    {% endif %}
 {% endblock %}

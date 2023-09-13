@@ -57,11 +57,8 @@ class EventController extends AbstractController
     public function index(Request $request): Response
     {
         $filters = $this->getFilters($request);
-        /** @var User $user */
-        $user = $this->getUser();
         $pagination = $this->eventService->getPaginatedList(
             $request->query->getInt('page', 1),
-            $user,
             $filters
         );
 

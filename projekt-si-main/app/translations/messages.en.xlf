@@ -170,6 +170,39 @@
                 <source>label.title</source>
                 <target>title</target>
         </trans-unit>
+        <trans-unit id="title.todays_event_list">
+                <source>title.todays_event_list</source>
+                <target>today's events</target>
+        </trans-unit>
+        <trans-unit id="message.created_successfully">
+            <source>message.created_successfully</source>
+            <target>created successfully.</target>
+        </trans-unit>
+
+        <trans-unit id="message.category_contains_events">
+            <source>message.category_contains_events</source>
+            <target>This category contains events.</target>
+        </trans-unit>
+
+        <trans-unit id="message.deleted_successfully">
+            <source>message.deleted_successfully</source>
+            <target>deleted successfully.</target>
+        </trans-unit>
+
+        <trans-unit id="message.edited_successfully">
+            <source>message.edited_successfully</source>
+            <target>edited successfully.</target>
+        </trans-unit>
+
+        <trans-unit id="message_item_not_found">
+            <source>message_item_not_found</source>
+            <target>Item not found.</target>
+        </trans-unit>
+
+        <trans-unit id="message.form_error">
+            <source>message.form_error</source>
+            <target>Form error.</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

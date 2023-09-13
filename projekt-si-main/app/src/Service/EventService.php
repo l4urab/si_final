@@ -54,19 +54,19 @@ class EventService implements EventServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
-     * @param User $author Event author
+     * @param int                $page    Page number
      * @param array<string, int> $filters Filters array
      *
-     * @return PaginationInterface<SlidingPagination> Paginated list
+     * @return PaginationInterface<string, mixed> Paginated list
+     *
      * @throws NonUniqueResultException
      */
-    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
+    public function getPaginatedList(int $page, array $filters = []): PaginationInterface
     {
         $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(
-            $this->eventRepository->queryByAuthor($author, $filters),
+            $this->eventRepository->queryAll($filters),
             $page,
             EventRepository::PAGINATOR_ITEMS_PER_PAGE
         );
