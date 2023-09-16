@@ -7,7 +7,6 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Event;
-use DateTimeInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -47,20 +46,6 @@ class EventRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Event::class);
     }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('event');
-    }
-
-
 
     /**
      * Save entity.
@@ -110,6 +95,7 @@ class EventRepository extends ServiceEntityRepository
 
         return $this->applyFiltersToList($queryBuilder, $filters);
     }
+
     /**
      * Delete entity.
      *
@@ -119,15 +105,6 @@ class EventRepository extends ServiceEntityRepository
     {
         $this->_em->remove($event);
         $this->_em->flush();
-    }
-
-    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
-    {
-        if (isset($filters['category']) && $filters['category'] instanceof Category) {
-            $queryBuilder->andWhere('category = :category')
-                ->setParameter('category', $filters['category']);
-        }
-        return $queryBuilder;
     }
 
     /**
@@ -147,12 +124,12 @@ class EventRepository extends ServiceEntityRepository
     /**
      * Find events within a specified date range.
      *
-     * @param DateTimeInterface $startDate Start date (inclusive)
-     * @param DateTimeInterface $endDate   End date (inclusive)
+     * @param \DateTimeInterface $startDate Start date
+     * @param \DateTimeInterface $endDate   End date
      *
      * @return Event[] Returns an array of Event objects
      */
-    public function findEventsWithinDateRange(DateTimeInterface $startDate, DateTimeInterface $endDate): array
+    public function findEventsWithinDateRange(\DateTimeInterface $startDate, \DateTimeInterface $endDate): array
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.date >= :startDate')
@@ -164,4 +141,33 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('event');
+    }
+
+    /**
+     * Apply filters.
+     *
+     * @param QueryBuilder $queryBuilder QueryBuilder
+     * @param array        $filters      Filters
+     *
+     * @return QueryBuilder The modified QueryBuilder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+
+        return $queryBuilder;
+    }
 }

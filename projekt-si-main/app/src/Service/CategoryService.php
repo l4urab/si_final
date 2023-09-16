@@ -4,19 +4,22 @@
  */
 
 namespace App\Service;
+
 use App\Repository\CategoryRepository;
 use App\Repository\EventRepository;
 use App\Entity\Category;
-use DateTimeImmutable;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\NonUniqueResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
+/**
+ * Category service.
+ */
 class CategoryService implements CategoryServiceInterface
 {
     /**
-     * Post repository.
+     * Event repository.
      */
     public EventRepository $eventRepository;
 
@@ -34,15 +37,15 @@ class CategoryService implements CategoryServiceInterface
      * Constructor.
      *
      * @param CategoryRepository $categoryRepository Category repository
+     * @param EventRepository    $eventRepository    Event repository
      * @param PaginatorInterface $paginator          Paginator
      */
-    public function __construct(CategoryRepository $categoryRepository, EventRepository $postRepository, PaginatorInterface $paginator)
+    public function __construct(CategoryRepository $categoryRepository, EventRepository $eventRepository, PaginatorInterface $paginator)
     {
         $this->categoryRepository = $categoryRepository;
-        $this->eventRepository = $postRepository;
+        $this->eventRepository = $eventRepository;
         $this->paginator = $paginator;
     }
-
 
     /**
      * Get paginated list.
@@ -67,10 +70,10 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if (null == $category->getId()) {
-            $category->setCreatedAt(new DateTimeImmutable());
+        if (null === $category->getId()) {
+            $category->setCreatedAt(new \DateTimeImmutable());
         }
-        $category->setUpdatedAt(new DateTimeImmutable());
+        $category->setUpdatedAt(new \DateTimeImmutable());
 
         $this->categoryRepository->save($category);
     }
@@ -84,7 +87,6 @@ class CategoryService implements CategoryServiceInterface
     {
         $this->categoryRepository->delete($category);
     }
-
 
     /**
      * Can Category be deleted?

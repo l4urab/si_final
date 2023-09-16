@@ -22,7 +22,6 @@ interface ContactServiceInterface
      */
     public function getPaginatedList(int $page): PaginationInterface;
 
-
     /**
      * Delete entity.
      *
@@ -30,7 +29,7 @@ interface ContactServiceInterface
      */
     public function delete(Contact $contact): void;
 
-    /**
+    /*
      * Save entity.
      *
      * @param Contact $contact Contact entity

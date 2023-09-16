@@ -19,8 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class EventType extends AbstractType
 {
-
-
     /**
      * Builds the form.
      *
@@ -65,7 +63,6 @@ class EventType extends AbstractType
                 'required' => true,
             ]
         );
-
     }
 
     /**

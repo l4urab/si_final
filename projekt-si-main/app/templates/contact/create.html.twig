@@ -6,15 +6,36 @@
 
 {% block body %}
     <h1>{{ 'title.create'|trans }}</h1>
+
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.name) }} {# Display name field errors here #}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.email) }} {# Display email field errors here #}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.phoneNumber) }}
+        {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.phoneNumber) }} {# Display phoneNumber field errors here #}
+    </div>
+
     <div class="form-group row float-sm-right">
         <input type="submit" value="{{ 'action.save'|trans }}" class="btn btn-primary"/>
     </div>
+
     <div class="form-group row float-sm-left">
         <a href="{{ url('contact_index') }}" class="{{ 'btn btn-light' }}">
             {{ 'action.back_to_list'|trans }}
         </a>
     </div>
+
     {{ form_end(form) }}
 {% endblock %}

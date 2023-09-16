@@ -15,8 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
-
-
 /**
  * Class CategoryController.
  */
@@ -30,19 +28,18 @@ class CategoryController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
     /**
      * Constructor.
      *
-     * @param TranslatorInterface      $translator  Translator
+     * @param CategoryServiceInterface $categoryService Category service
+     * @param TranslatorInterface      $translator      Translator
      */
-    public function __construct(CategoryServiceInterface $eventService, TranslatorInterface $translator)
+    public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
     {
-        $this->categoryService = $eventService;
+        $this->categoryService = $categoryService;
         $this->translator = $translator;
     }
 
@@ -80,7 +77,6 @@ class CategoryController extends AbstractController
     {
         return $this->render('category/show.html.twig', ['category' => $category]);
     }
-
 
     /**
      * Create action.
@@ -153,8 +149,6 @@ class CategoryController extends AbstractController
         );
     }
 
-
-
     /**
      * Delete action.
      *
@@ -166,7 +160,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Category $category): Response
     {
-        if(!$this->categoryService->canBeDeleted($category)) {
+        if (!$this->categoryService->canBeDeleted($category)) {
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.category_contains_events')
@@ -204,6 +198,4 @@ class CategoryController extends AbstractController
             ]
         );
     }
-
-
 }

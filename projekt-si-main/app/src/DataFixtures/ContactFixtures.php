@@ -6,7 +6,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Contact;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -19,15 +18,11 @@ class ContactFixtures extends Fixture
 {
     /**
      * Faker.
-     *
-     * @var Generator
      */
     protected Generator $faker;
 
     /**
      * Persistence object manager.
-     *
-     * @var ObjectManager
      */
     protected ObjectManager $manager;
 
@@ -47,10 +42,10 @@ class ContactFixtures extends Fixture
             $contact->setEmail($this->faker->sentence);
 
             $contact->setCreatedAt(
-                DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+                \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
             );
             $contact->setUpdatedAt(
-                DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+                \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
             );
             $manager->persist($contact);
         }

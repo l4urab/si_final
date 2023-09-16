@@ -7,7 +7,6 @@ namespace App\Service;
 
 use App\Repository\ContactRepository;
 use App\Entity\Contact;
-use DateTimeImmutable;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -29,8 +28,8 @@ class ContactService implements ContactServiceInterface
     /**
      * Constructor.
      *
-     * @param ContactRepository    $contactRepository Contact repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param ContactRepository  $contactRepository Contact repository
+     * @param PaginatorInterface $paginator         Paginator
      */
     public function __construct(ContactRepository $contactRepository, PaginatorInterface $paginator)
     {
@@ -71,15 +70,11 @@ class ContactService implements ContactServiceInterface
      */
     public function save(Contact $contact): void
     {
-        if (null == $contact->getId()) {
-            $contact->setCreatedAt(new DateTimeImmutable());
+        if (null === $contact->getId()) {
+            $contact->setCreatedAt(new \DateTimeImmutable());
         }
-        $contact->setUpdatedAt(new DateTimeImmutable());
+        $contact->setUpdatedAt(new \DateTimeImmutable());
 
         $this->contactRepository->save($contact);
     }
-
-
-
-
 }

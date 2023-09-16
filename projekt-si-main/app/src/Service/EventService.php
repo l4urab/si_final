@@ -4,15 +4,12 @@
  */
 
 namespace App\Service;
-use App\Entity\User;
+
 use App\Entity\Event;
-use App\Entity\Contact;
 use App\Repository\EventRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Knp\Component\Pager\Pagination\SlidingPagination;
 use Knp\Component\Pager\PaginatorInterface;
-use App\Service\CategoryServiceInterface;
 
 /**
  * Class EventService.
@@ -33,14 +30,11 @@ class EventService implements EventServiceInterface
      * Constructor.
      *
      * @param CategoryServiceInterface $categoryService Category service
-     * @param EventRepository    $eventRepository Event repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param PaginatorInterface       $paginator       Paginator
+     * @param EventRepository          $eventRepository Event repository
      */
-    public function __construct(
-        CategoryServiceInterface $categoryService,
-        PaginatorInterface $paginator,
-        EventRepository $eventRepository
-    ) {
+    public function __construct(CategoryServiceInterface $categoryService, PaginatorInterface $paginator, EventRepository $eventRepository)
+    {
         $this->categoryService = $categoryService;
         $this->paginator = $paginator;
         $this->eventRepository = $eventRepository;
@@ -72,11 +66,6 @@ class EventService implements EventServiceInterface
         );
     }
 
-
-
-
-
-
     /**
      * Save entity.
      *
@@ -84,7 +73,7 @@ class EventService implements EventServiceInterface
      */
     public function save(Event $event): void
     {
-        if (null == $event->getId()) {
+        if (null === $event->getId()) {
             $event->setCreatedAt(new \DateTimeImmutable());
         }
         $event->setUpdatedAt(new \DateTimeImmutable());
@@ -108,6 +97,7 @@ class EventService implements EventServiceInterface
      * @param array<string, int> $filters Raw filters from request
      *
      * @return array<string, object> Result array of filters
+     *
      * @throws NonUniqueResultException
      */
     private function prepareFilters(array $filters): array
@@ -119,8 +109,7 @@ class EventService implements EventServiceInterface
                 $resultFilters['category'] = $category;
             }
         }
+
         return $resultFilters;
     }
-
-
 }

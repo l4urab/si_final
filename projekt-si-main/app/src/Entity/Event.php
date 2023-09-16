@@ -1,20 +1,23 @@
 <?php
+/**
+ * Event entity.
+ *
+ * Represents an event entity in the application.
+ *
+ * @psalm-suppress MissingConstructor
+ */
 
 namespace App\Entity;
 
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeImmutable;
-use DateTimeInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Class Event.
+ * Event entity.
  *
  * Represents an event entity in the application.
- *
- * @psalm-suppress MissingConstructor
  */
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\Table(name: 'events')]
@@ -24,8 +27,6 @@ class Event
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -35,23 +36,21 @@ class Event
     /**
      * Created at.
      *
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ? DateTimeInterface $createdAt = null;
+    private ?\DateTimeInterface $createdAt = null;
 
     /**
      * Updated at.
      *
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ? DateTimeInterface $updatedAt = null;
+    private ?\DateTimeInterface $updatedAt = null;
 
     /**
      * Name.
-     *
-     * @var string|null
      */
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -59,25 +58,23 @@ class Event
     /**
      * Date of the event.
      *
-     * @var DateTimeImmutable|null
+     * @var \DateTimeImmutable|null
      */
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ? DateTimeInterface $date = null;
+    private ?\DateTimeInterface $date = null;
 
     /**
      * Category.
-     *
-     * @var Category
      */
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
-
-
+    /**
+     * Author.
+     */
     #[ORM\ManyToOne]
     private ?User $author = null;
-
 
     /**
      * Getter for Id.
@@ -92,9 +89,9 @@ class Event
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created date of the event
+     * @return \DateTimeImmutable|null
      */
-    public function getCreatedAt(): ? DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -102,21 +99,23 @@ class Event
     /**
      * Setter for created at.
      *
-     * @param DateTimeInterface $createdAt Created date of the event
-     * @return static
+     * @param \DateTimeInterface $createdAt Created date of the event
+     *
+     * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $createdAt): static
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated date of the event
+     * @return \DateTimeImmutable|null
      */
-    public function getUpdatedAt(): ? DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -124,12 +123,14 @@ class Event
     /**
      * Setter for updated at.
      *
-     * @param DateTimeInterface $updatedAt Updated date of the event
-     * @return static
+     * @param \DateTimeInterface $updatedAt Updated date of the event
+     *
+     * @return $this
      */
-    public function setUpdatedAt(DateTimeInterface $updatedAt): static
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -147,20 +148,22 @@ class Event
      * Setter for name.
      *
      * @param string $name Name of the event
-     * @return static
+     *
+     * @return $this
      */
     public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
      * Getter for the date of the event.
      *
-     * @return DateTimeImmutable|null Date of the event
+     * @return \DateTimeImmutable|null Date of the event
      */
-    public function getDate(): ? DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
@@ -168,21 +171,22 @@ class Event
     /**
      * Setter for the date of the event.
      *
-     * @param DateTimeInterface $date Date of the event
-     * @return static
+     * @param \DateTimeInterface $date Date of the event
+     *
+     * @return $this
      */
-    public function setDate(DateTimeInterface $date): static
+    public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
         return $this;
     }
 
     /**
      * Get the associated Category entity.
      *
-     * @return Category|null The associated Category entity or null if not set.
+     * @return Category|null the associated Category entity or null if not set
      */
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -191,9 +195,9 @@ class Event
     /**
      * Set the associated Category entity.
      *
-     * @param Category|null $category The Category entity to associate or null to disassociate.
+     * @param Category|null $category the Category entity to associate or null to disassociate
      *
-     * @return static Returns this entity instance to enable method chaining.
+     * @return static returns this entity instance to enable method chaining
      */
     public function setCategory(?Category $category): static
     {
@@ -202,17 +206,27 @@ class Event
         return $this;
     }
 
+    /**
+     * Get the associated Author entity.
+     *
+     * @return User|null Author entity
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * Set the associated Author entity.
+     *
+     * @param User|null $author Author entity
+     *
+     * @return $this
+     */
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
 
         return $this;
     }
-
-
 }

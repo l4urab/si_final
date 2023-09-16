@@ -1,4 +1,7 @@
 <?php
+/**
+ * Contact controller.
+ */
 
 namespace App\Controller;
 
@@ -25,8 +28,6 @@ class ContactController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
@@ -34,7 +35,7 @@ class ContactController extends AbstractController
      * Constructor.
      *
      * @param ContactServiceInterface $contactService Contact service
-     * @param TranslatorInterface      $translator  Translator
+     * @param TranslatorInterface     $translator     Translator
      */
     public function __construct(ContactServiceInterface $contactService, TranslatorInterface $translator)
     {
@@ -111,7 +112,7 @@ class ContactController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Contact    $contact    Contact entity
+     * @param Contact $contact Contact entity
      *
      * @return Response HTTP response
      */
@@ -148,7 +149,6 @@ class ContactController extends AbstractController
         );
     }
 
-
     /**
      * Delete action.
      *
@@ -160,7 +160,6 @@ class ContactController extends AbstractController
     #[Route('/{id}/delete', name: 'contact_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Contact $contact): Response
     {
-
         $form = $this->createForm(
             FormType::class,
             $contact,
@@ -190,5 +189,4 @@ class ContactController extends AbstractController
             ]
         );
     }
-
 }

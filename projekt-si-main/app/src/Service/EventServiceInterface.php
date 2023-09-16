@@ -4,7 +4,7 @@
  */
 
 namespace App\Service;
-use App\Entity\User;
+
 use App\Entity\Event;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
@@ -23,10 +23,6 @@ interface EventServiceInterface
      */
     public function getPaginatedList(int $page, array $filters = []): PaginationInterface;
 
-
-
-
-
     /**
      * Save entity.
      *
@@ -39,6 +35,4 @@ interface EventServiceInterface
      * @param Event $event Event entity
      */
     public function delete(Event $event): void;
-
-
 }
